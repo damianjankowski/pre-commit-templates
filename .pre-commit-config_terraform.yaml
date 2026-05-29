@@ -8,6 +8,10 @@ repos:
       - id: check-added-large-files
       - id: check-merge-conflict
       - id: check-json
+      - id: check-case-conflict
+      - id: detect-private-key
+      - id: no-commit-to-branch
+        args: [--branch, main, --branch, master]
 
   - repo: https://github.com/antonbabenko/pre-commit-terraform
     rev: v1.105.0
@@ -19,8 +23,14 @@ repos:
           - --hook-config=--create-file-if-not-exist=true
       - id: terraform_tflint
       - id: terraform_trivy
+      - id: terraform_checkov
+      - id: terraform_providers_lock
+        args:
+          - --args=-platform=linux_amd64
+          - --args=-platform=darwin_amd64
+          - --args=-platform=darwin_arm64
 
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.30.0
+    rev: v8.30.1
     hooks:
       - id: gitleaks
